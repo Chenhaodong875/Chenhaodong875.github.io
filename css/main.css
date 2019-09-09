@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #79120a;
+  background: #ffffe4;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3126,4 +3126,10 @@ pre .javascript .function {
   .pagination {
     margin: 8px 0 0;
   }
+}
+body {
+  cursor: url("https://github.com/Chenhaodong875/Chenhaodong875.github.io/tree/master/images/default.cur"), default;
+}
+a:hover {
+  cursor: url("https://github.com/Chenhaodong875/Chenhaodong875.github.io/tree/master/images/pointer.cur"), pointer;
 }
