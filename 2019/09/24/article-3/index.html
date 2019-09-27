@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="CHD-Blog">
 <meta property="og:description" content="1.物理层：定义了终端设备的传输介质，传输的是比特流。 ​        注意：不管是什么传输介质，传输数据的过程中，信号都会出现衰减，这个时候需                    要使用设备来延长信号的传输距离。 ​        物理层设备：hub集线器，只能识别比特流； ​                                总线型：网络传输效率特别低 ​">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-24T12:06:09.490Z">
+<meta property="og:updated_time" content="2019-09-25T04:19:11.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络各层模型概述">
 <meta name="twitter:description" content="1.物理层：定义了终端设备的传输介质，传输的是比特流。 ​        注意：不管是什么传输介质，传输数据的过程中，信号都会出现衰减，这个时候需                    要使用设备来延长信号的传输距离。 ​        物理层设备：hub集线器，只能识别比特流； ​                                总线型：网络传输效率特别低 ​">
@@ -453,6 +453,23 @@
 <p>​            浮动路由：多条链路中至于一条是主链路，其他都是备份链路，只有主链路发生故                                障，备份链路才会被启用。</p>
 <p>​                                通过修改静态路由的优先级（管理距离）来决定那条链路是主链路。</p>
 <p>​                                优先级的范围是1——255，越小越优先，默认是1可修改优先级，在下一                                跳后添加</p>
+<p>4.传输层：把数据包装花城数据段，为数据提供可靠（TCP）或不可靠的(UDP)传输，并为应                    用程序提供端到端的服务。</p>
+<p>​    传输层协议：TCP/IP协议族的传输层协议主要有TCP协议和UDP协议；</p>
+<p>​                            TCP（Transmission Control Protocol）传输控制协议：，端到端的协议</p>
+<p>​                                    面向连接的，可靠的，提供全双工的服务；</p>
+<p>​                                    报文结构：源目端口号，序列号，确认号，flag标志位</p>
+<p>​                            UDP（User Datagram Protocol）用户数据报协议；</p>
+<p>​                                    无连接的，不可靠的；</p>
+<p>​                                    报文结构：源目端口号，UDP长度，校验和；</p>
+<p>​                            netstat  -an  —-windows命令行查询本地看房的端口号及协议信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">***TCP三次握手：</span><br><span class="line"></span><br><span class="line">​（1）SYN=1;    //向服务器发送想建立连接的请求；</span><br><span class="line">	seq=x;     //向服务器发送数据包，序列号编号为x；</span><br><span class="line">	</span><br><span class="line">​（2）SYN=1,ACK=1;      //服务器回复同意建立连接请求，并确认了请求；</span><br><span class="line">	seq=y,ack=x+1;     //服务器回复数据包的序列号为y，并确认了PC的数据包x+1；</span><br><span class="line">	</span><br><span class="line">​（3）ACK=1;    //pc确认后，给服务器回复，发送数据包序列号为x+1；</span><br><span class="line">	seq= x+1,ack=y+1;   //pc确认收到服务器的数据包y+1，并发送数据包序列号为								x+1；</span><br></pre></td></tr></table></figure>
+
+<p>​    基于TCP的三次握手的攻击：<br>（1）SYN攻击：攻击者向服务器发送大量的伪造请求报文，服务器会向假的请求者建立连接关系，但是实际上这些主机根本没有请求服务器建立连接，所以导致服务器一直处于半连接状态，如果连接过多，会造成服务器资源消耗严重，甚至死机。<br>（2）LAND攻击：攻击者伪造报文，让服务器自己和自己建立连接，导致服务器资源消耗严重。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">***TCP四次断开连接：</span><br><span class="line"></span><br><span class="line">（1）pc没有数据传给服务器，请求拆除连接；</span><br><span class="line"></span><br><span class="line">​			FIN=1,seq=m;</span><br><span class="line"></span><br><span class="line">（2）服务器确认收到信息并回复响应pc;</span><br><span class="line"></span><br><span class="line">​			ACK=1,seq=n,ack=m+1;</span><br><span class="line"></span><br><span class="line">（3）服务器同意回复终止连接;</span><br><span class="line"></span><br><span class="line">​			FIN=1,seq=n,ack=m+1;</span><br><span class="line"></span><br><span class="line">（4）pc确认收到信息并回复给服务器;</span><br><span class="line"></span><br><span class="line">​			ACK=1,seq=m+1,ack=n+1;</span><br></pre></td></tr></table></figure>
+
+<p>5.会话层</p>
+<p>6.表示层</p>
+<p>7.应用层</p>
 
       
     </div>
@@ -492,6 +509,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/25/article-5/" rel="prev" title="Windows系统基础">
+                Windows系统基础 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -561,7 +582,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -574,7 +595,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
