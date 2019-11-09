@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="绕过,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前端绕过、服务端验证绕过、配合解析漏洞突破上传、编辑器漏洞">
+<meta name="keywords" content="绕过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见的上传绕过和解析漏洞">
+<meta property="og:url" content="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/index.html">
+<meta property="og:site_name" content="CHD-Blog">
+<meta property="og:description" content="前端绕过、服务端验证绕过、配合解析漏洞突破上传、编辑器漏洞">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/C:%5CUsers%5Chp%5Cblog%5Csource_posts%5C%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%92%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%5C1.jpg">
+<meta property="og:image" content="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/C:%5CUsers%5Chp%5Cblog%5Csource_posts%5C%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%92%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%5Cimage-20191108203012562.png">
+<meta property="og:image" content="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/C:%5CUsers%5Chp%5Cblog%5Csource_posts%5C%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%92%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%5Cimage-20191108210203376.png">
+<meta property="og:image" content="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/C:%5CUsers%5Chp%5Cblog%5Csource_posts%5C%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%92%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%5Cimage-20191108210346769.png">
+<meta property="og:updated_time" content="2019-11-08T13:04:23.909Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见的上传绕过和解析漏洞">
+<meta name="twitter:description" content="前端绕过、服务端验证绕过、配合解析漏洞突破上传、编辑器漏洞">
+<meta name="twitter:image" content="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/C:%5CUsers%5Chp%5Cblog%5Csource_posts%5C%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%92%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%5C1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/">
+
+
+
+
+
+  <title>常见的上传绕过和解析漏洞 | CHD-Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHD-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">网络安全</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈浩东">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/2.jpg">
+    </span>
+
+     <span title="Words count in article">
+     1.7k 字
+     </span>
+
+        ...
+     <span title="Reading time">
+     6 分钟
+     </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHD-Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">常见的上传绕过和解析漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-05T21:28:18+08:00">
+                2019-11-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time </span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前端绕过、服务端验证绕过、配合解析漏洞突破上传、编辑器漏洞</p>
+<a id="more"></a>
+
+<p>​    通常一个文件以http协议进行上传时，将以POST请求发送web服务器，Web服务器接收到请求并同意后，用户与web服务器将建立连接并传输数据。</p>
+<p>（get只支持245个字节，太小；post的文件不能超过2M，数据不能超过8M）</p>
+<p>客户端js检测–》http post请求(上传文件) –》Web服务器</p>
+<p>A.客户端JavaScript检测（通常为检测文件扩展名）</p>
+<p>B.服务端MIME类型检测（检测Content-Type内容）</p>
+<p>C.服务端目录路径检测（检测跟path参数相关的内容）</p>
+<p>D.服务端文件名扩展名检测（检测跟文件estension相关的内容）</p>
+<p>F.服务器文件内容检测（检测内容是否合法或含有恶意代码）</p>
+<h3 id="1-客户端检测："><a href="#1-客户端检测：" class="headerlink" title="1.客户端检测："></a>1.客户端检测：</h3><p>​    客户端检测通常在上传页面里含有专门检测文件上传的JavaScript代码。最常见的就是检测扩展名是否合法。</p>
+<p>判断方式：</p>
+<p>​    在浏览加载文件，但还未点击上传按钮时便弹出对话框，内容如：只允许上传.jpg/.jpeg/.png后缀名的文件，而此时并没有发送数据包。</p>
+<p>（1）审查元素，把校验的函数干掉，注入掉</p>
+<p>（2）抓包，把文件名改为PHP</p>
+<p>绕过方法：</p>
+<p>（1）利用burpsuite之类的代理工具。</p>
+<p>（2）修改webshell后缀类型为允许上传类型。</p>
+<p>（3）抓包拦截将其后缀名改为对应服务器可以解析的后缀名。</p>
+<h3 id="2-服务端MIME检测："><a href="#2-服务端MIME检测：" class="headerlink" title="2.服务端MIME检测："></a>2.服务端MIME检测：</h3><p>服务端MIME类型检测也就是检测Content-Type的内容。下面是一端测试模拟代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>($_FILES[<span class="string">'userfile'</span>][<span class="string">'type'</span>] != <span class="string">"image/gif"</span>) &#123;</span><br><span class="line">    <span class="comment">//检测Content-type</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"Sorry, we only allow uploading GIF 				images"</span>;</span><br><span class="line">	<span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line">$uploaddir = <span class="string">'uploads/'</span>;</span><br><span class="line">$uploadfile = $uploaddir . $_FILES[<span class="string">'userfile'</span>]					[<span class="string">'name'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (move_uploaded_file($_FILES[<span class="string">'userfile'</span>][<span class="string">'tmp_ name'</span>], $uploadfile)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"File is valid, and was succesfully 				uploaded.\n"</span>;</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"File uploading failed.\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>绕过方法：</p>
+<p>将request包的content-type修改为图片类型。</p>
+<p><img src="/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/C:%5CUsers%5Chp%5Cblog%5Csource_posts%5C%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%92%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%5C1.jpg" alt="img"> </p>
+<h3 id="3-服务端目录路径检测："><a href="#3-服务端目录路径检测：" class="headerlink" title="3.服务端目录路径检测："></a>3.服务端目录路径检测：</h3><p>​    服务端目录路径检测：一般是检测保存路径是否合法，但一般都没有防御。检测跟path参数相关的内容。</p>
+<p>​    漏洞成因是因为对迷路路径的检测不够严谨而导致可以用0x00截断的方式来进行攻击。</p>
+<p>​    0x00截断：上传文件的时候，当系统文件读到（0x00）时，会认为文件已经结束。利用00截断就是利用web应用对文件上传的路径过滤的不严格，产生0x00上传截断漏洞。</p>
+<p>绕过办法：</p>
+<p>​    通过抓包截断将eval.php.jpg换成eval.php_jpg（下划线为 0x00）。在上传文件时系统文件遇到0x00，会认为文件已经结束。从而将eval.php.jpg的内容写入到eval.php中。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$FilePath=C:/wamp/www/uploadfile/<span class="keyword">eval</span>.php_.jpg</span><br><span class="line">move_uploaded_file($_FILES[<span class="string">"upload_file"</span>]			[<span class="string">"tmp_name"</span>],$FilePath);</span><br></pre></td></tr></table></figure>
+
+<p>在执行move_uploaded_file的这个函数时，底层操作调用类似于C语言。遇到0X00会自动截断，真是写入的地址应该是C:/wamp/www/uploadfile/eval.php</p>
+<p>（在BS里可用hex改）</p>
+<h3 id="4-服务端文件名拓展检测："><a href="#4-服务端文件名拓展检测：" class="headerlink" title="4.服务端文件名拓展检测："></a>4.服务端文件名拓展检测：</h3><p>​    基于黑名单检测：</p>
+<p>​        黑名单的安全性比白名单的安全性低很多，攻击手法自然也比白名单多。一般由个专门的blacklist，里面包含常见的危险脚本文件。</p>
+<p>绕过办法：</p>
+<p>（1）文件名大小写绕过（AsP，pHp等等）</p>
+<p>（2）黑白名单绕过（php,php2,php3,php5,phtml,asp,aspx,ascx,ashx,cer,asa,jsp,jspx）cdx,</p>
+<p>（3）特殊文件名绕过</p>
+<p>​    修改数据包里的文件名改为test.php.  或者 test.asp_ (下划线是空格)，由于这种命名格式在Windows系统里是不允许的，所以在绕过上传之后Windows系统会自动去掉 点和空格。Unix/linux系统是没有这个特性。</p>
+<p>（4）0x00截断绕过</p>
+<p>​    文件名后缀就一个%00字节，可以截断某些函数对文件名的判断。在许多语言函数中，处理字符串的函数中0x00被认为是终止符。</p>
+<p>​    例如：</p>
+<p>​            网站上传函数处理xxx.php%00.jpg时，首先后缀名是合法的jpg格式，可以上传，在保存文件是，遇到%00字符丢弃后面的jpg,文件后缀最终保存的后缀名为xxx.php</p>
+<p>（5）.htaccess文件攻击（结合黑名单攻击）</p>
+<p>​    .htaccess文件攻击即结合黑名单攻击服务器的.htaccess文件。</p>
+<p>​    通过move_uploaded_file函数把自己写的.htaccess文件覆盖掉服务器上的这样就可以解析定义名单了。</p>
+<p>​    .htaccess文件用处：(分布式配置文件)</p>
+<p>​            通过.htaccess文件调用PHP解释器去解析一个文件名中只要包含“haha” 这个字符串的任意文件，无论你文件名是什么样子，只要包含”haha“这个字符串，都可以被以PHP的方式来解析。</p>
+<p>​    .htaccess文件内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch &quot;haha&quot;&gt;</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（6）解析绕过</p>
+<h3 id="5-服务端文件内容拓展检测："><a href="#5-服务端文件内容拓展检测：" class="headerlink" title="5.服务端文件内容拓展检测："></a>5.服务端文件内容拓展检测：</h3><p>​    如果文件内容检测设置的比较严格，那么上传攻击将变得非常困难。也可以说他是代码检测的最后一道关卡。如果他被突破了，就算代码层的漏洞，也可以结合解析漏洞进行攻击。</p>
+<p>（1）文件幻数检测  jpg（JFIF）gif（GIF89a）png（%PNG）</p>
+<p>（2）文件相关信息检测（文件头加一些图片信息中间夹杂攻击代码）</p>
+<p>（3）文件加载检测（调用API或者函数进行文件健在测试PHP的gd库）</p>
+<p>绕过方法：</p>
+<p>​    文件幻数检测绕过：主要是检测文件内容开始处的文件幻数，比如图片类型的文件 幻数如下：</p>
+<p>​    要绕过jpg文件幻数检测就要在文件开头写上下图的值：</p>
+<p><img src="/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/C:%5CUsers%5Chp%5Cblog%5Csource_posts%5C%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%92%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%5Cimage-20191108203012562.png" alt="image-20191108203012562"></p>
+<p>gif文件：GIF89a</p>
+<p>png文件：%PNG</p>
+<p>制作图片马：(一句话木马结合图片)</p>
+<p>cmd下执行：copy /b  1.jpg+2.php=3.jpg</p>
+<p>6.Apache解析漏洞：</p>
+<p>​    test.php.ccc 任意不属于黑名单且不属于Apache解析白名单之内的后缀名。（从后往前知道识别出认识的后缀名默认为它）</p>
+<p>说明：<br>    一个文件名为test. php. aaa. bbb. ccc的文件，Apache 会从ccc的位置往.php的位置开始尝试解析， 如果ccc不属于Apache能解析的后缀名，那么。Apache就会尝试去解析bbb,这样一直往前尝试， 直到遇到一个能解 析的拓展名为止。</p>
+<p><img src="/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/C:%5CUsers%5Chp%5Cblog%5Csource_posts%5C%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%92%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%5Cimage-20191108210203376.png" alt="image-20191108210203376"></p>
+<p>7.总结：</p>
+<p>（1）黑名单绕过：</p>
+<p>文件名大小写绕过；</p>
+<p>黑名单列表绕过；</p>
+<p>特殊文件名绕过；</p>
+<p>0x00截断绕过；</p>
+<p>.htaccess文件攻击；</p>
+<p>Apache解析漏洞；</p>
+<p>IIS解析漏洞；</p>
+<p>nginx解析漏洞；</p>
+<p>（2）白名单绕过：</p>
+<p>文件名后缀0x00截断绕过；</p>
+<p>PHP文件包含漏洞；</p>
+<p>IIS解析漏洞；</p>
+<p>nginx解析漏洞；</p>
+<p><img src="/Chenhaodong875/Chenhaodong875.github.io/2019/11/05/常见的上传绕过和解析漏洞/C:%5CUsers%5Chp%5Cblog%5Csource_posts%5C%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87%E5%92%8C%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E%5Cimage-20191108210346769.png" alt="image-20191108210346769"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/绕过/" rel="tag"># 绕过</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/05/文件上传漏洞/" rel="next" title="文件上传漏洞">
+                <i class="fa fa-chevron-left"></i> 文件上传漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/06/利用中国菜刀结合一句话木马拿webshell/" rel="prev" title="利用中国菜刀结合一句话木马拿webshell">
+                利用中国菜刀结合一句话木马拿webshell <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/2.jpg" alt="陈浩东">
+            
+              <p class="site-author-name" itemprop="name">陈浩东</p>
+              <p class="site-description motion-element" itemprop="description">网络安全入狱指南</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-客户端检测："><span class="nav-number">1.</span> <span class="nav-text">1.客户端检测：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-服务端MIME检测："><span class="nav-number">2.</span> <span class="nav-text">2.服务端MIME检测：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-服务端目录路径检测："><span class="nav-number">3.</span> <span class="nav-text">3.服务端目录路径检测：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-服务端文件名拓展检测："><span class="nav-number">4.</span> <span class="nav-text">4.服务端文件名拓展检测：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-服务端文件内容拓展检测："><span class="nav-number">5.</span> <span class="nav-text">5.服务端文件内容拓展检测：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈浩东</span>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">36.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script src="/live2d-widget/autoload.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

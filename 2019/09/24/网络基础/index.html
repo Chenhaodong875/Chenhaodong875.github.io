@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="网络,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.什么是网络？ 计算机把不在同一地理位置的主机，通过传输介质和通信协议，实现网络通信和资源共享。 2.网络四要素？ 传输介质、通信协议、资源、终端">
+<meta name="keywords" content="网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络基础概述">
+<meta property="og:url" content="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/09/24/网络基础/index.html">
+<meta property="og:site_name" content="CHD-Blog">
+<meta property="og:description" content="1.什么是网络？ 计算机把不在同一地理位置的主机，通过传输介质和通信协议，实现网络通信和资源共享。 2.网络四要素？ 传输介质、通信协议、资源、终端">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-04T09:17:32.313Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络基础概述">
+<meta name="twitter:description" content="1.什么是网络？ 计算机把不在同一地理位置的主机，通过传输介质和通信协议，实现网络通信和资源共享。 2.网络四要素？ 传输介质、通信协议、资源、终端">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/09/24/网络基础/">
+
+
+
+
+
+  <title>网络基础概述 | CHD-Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHD-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">网络安全</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/09/24/网络基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈浩东">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/2.jpg">
+    </span>
+
+     <span title="Words count in article">
+     3.2k 字
+     </span>
+
+        ...
+     <span title="Reading time">
+     11 分钟
+     </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHD-Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络基础概述</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-24T14:09:24+08:00">
+                2019-09-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time </span>
+                
+                <span title="Reading time">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1.什么是网络？</p>
+<p>计算机把不在同一地理位置的主机，通过传输介质和通信协议，实现网络通信和资源共享。</p>
+<p>2.网络四要素？</p>
+<p>传输介质、通信协议、资源、终端</p>
+<a id="more"></a>
+
+<p>3.网络的分类：</p>
+<p>（1）按范围划分：</p>
+<p>​        WAN:广域网（万维网—–外网—-公网）</p>
+<p>​        LAN:局域网（内网—私网）</p>
+<p>​        MAN;城域网</p>
+<p>​        PAN:个域网</p>
+<p>（2）按IP地址划分：</p>
+<p>​        公网IP地址:由Inter NIC负责。这些IP地址分配给注册并向Inter NIC提出申请的组织机构。通过它直接访问因特网。</p>
+<p>​                A类：1.0.0.1-126.255.255.254 </p>
+<p>​                B类：128.1.0.1-191.254.255.254 </p>
+<p>​                C类：192.0.1.1-223.255.254.254</p>
+<p>​        私网IP地址：属于非注册地址，专门为组织机构内部使用。</p>
+<p>​                A类：10.0.0.0——10.255.255.255</p>
+<p>​                B类：172.16.0.0——172.31.255.255</p>
+<p>​                C类：192.168.0.0——192.168.255.255</p>
+<p>​                D类：239.0.0.0——239.255.255.255</p>
+<p>（3）按拓扑结构划分：</p>
+<p>​        星型拓扑：易于实现、网络扩展、故障排查</p>
+<p>​                            中心节点压力大，组网成本较高</p>
+<p>​        网型拓扑：各个节点至少与其他两个节点相连</p>
+<p>​                            可靠性高、组网成本高</p>
+<p>​                            全网型和部分网状型</p>
+<p>4.网络协议（语言）包括：</p>
+<p>​        语法、语义、语序（同步）</p>
+<p>5.网络国际标准包组织括：</p>
+<p>​        ISO：国际标准化组织</p>
+<p>​        ANSI：美国国家标准化局</p>
+<p>​        ITU-T：国际电信联盟-电信标准部</p>
+<p>​        IEEE：电气和电子工程师学会ISO：国际标准化组织</p>
+<p>6.网络OSI标准七层模型：</p>
+<p>​     最开始的网络厂商是不兼容的，不能直接对接。  为了促进各厂商的融合，ISO组织提出    了OSI（Open System Interconnection，OSI）七层模型。</p>
+<p>​    主要定义了数据在传输过程中如何进行‘封装’（打包）和‘解封装’（拆包）</p>
+<p>​        物理层：定义了终端设备的传输介质；传输比特流。</p>
+<p>​        数据链路层：把比特流转化成数据帧，实现基于二层MAC地址的寻址与转发。</p>
+<p>​        网络层：把数据帧转化成数据包，实现基于三层IP地址的寻址和转发。</p>
+<p>​        传输层（运输层）：把数据包装花城数据段，为数据提供可靠（TCP）或不可靠的                                            (UDP)传输，并为应用程序提供端到端的服务。</p>
+<p>​        会话层：用来建立、维持、管理和终止会话。</p>
+<p>​        表示层：数据的表现形式，比如加密和压缩。</p>
+<p>​        应用层：为用户提供服务。</p>
+<p>7.常见的物理介质：</p>
+<p>（1）同轴线缆：传输速度快，只有一个芯，半双工</p>
+<p>​                应用：电视，监控；</p>
+<p>​                100base-2(细线，理论上可以传输185m)</p>
+<p>​                100base-5(粗线，理论上可以传输500m)</p>
+<p>（2）光纤：两根芯，全双工</p>
+<p>​                单模光纤：只传输一种光，传输距离远</p>
+<p>​                多模光纤：可以传输多种光</p>
+<p>（3）网线：以太网（内网）一种常见传输介质</p>
+<p>​                结构划分：</p>
+<p>​                        屏蔽双绞线（有锡纸包裹，适合室外布线防雨）</p>
+<p>​                        非屏蔽双绞线（适合室内家用）</p>
+<p>​                传输速率划分：</p>
+<p>​                        五类线CAT5—–10兆和百兆以太网</p>
+<p>​                        六类线CAT6—–千兆以太网</p>
+<p>​                        七类线（超六类）—–万兆以太网</p>
+<p>​                网线排序分类：</p>
+<p>​                        T568A：绿白，绿，橙白，蓝，蓝白，橙，棕白，棕</p>
+<p>​                        T568B：橙白，橙，绿白，蓝，蓝白，绿，棕白，棕</p>
+<p>​                        以太网中，使用1,2用于发送；3,6用于接收。</p>
+<p>​                        直通线：一根线的两端都是T568B—-用于不同设备之间</p>
+<p>​                        双绞线：一端是T568B,另一端是T568A—-同种设备之间用</p>
+<p>​                        console线（全反线）—显示屏与主机间的那种长口线—-需要安装驱动                                                                并对设备进行配置</p>
+<p>8.常见术语：</p>
+<p>​        广播：一对多（老师讲课）</p>
+<p>​        组播：一对多（群聊），只有同一个组里的主机才能接收到。</p>
+<p>​        单播：一对一</p>
+<p>​        全双工：同一时刻可以同时进行发送（上传）和接收（下载）数据，如手机</p>
+<p>​        半双工：同一时刻，智能进行发送或接收数据，如对讲机</p>
+<p>​        单工：只能进行单向传输，如收音机</p>
+<p>​        冲突域：一个冲突影响的范围</p>
+<p>​        广播域：一个广播影响的范围</p>
+<p>​        带宽：单位时间内传输数据的速度，单位：bit/s</p>
+<p>9.进制：</p>
+<p>​        二进制：0,1</p>
+<p>​        八进制：0,1,2,3,4,5,6,7</p>
+<p>​        十进制：0,1,2,3,4,5,6,7,8,9</p>
+<p>​        十六进制：0,1,2,3,4,5,6,7,8,9，A(10),B(11),C(12),D(13),E(14),F(15)</p>
+<p>​    进制转换：</p>
+<p>​        十进制转化成其他进制：短除法/2 ,/8 ,/16 </p>
+<p>​        其他进制转化成十进制：乘法权位相加</p>
+<p>​        二进制与其他进制的转换：8421BCD码</p>
+<p>10.IP地址分为 IPV4 与 IPV6</p>
+<p>​        IPV4：由32位二进制数组成，用点分十进制表示，地址空间42亿。</p>
+<p>​                IPV4按用途分类分为：公网地址与私网地址；</p>
+<p>​                    公网地址：在互联网中使用，具有全球唯一性，运营商ISP负责分配公网IP</p>
+<p>​                    私网地址：以太网中可重复使用</p>
+<p>​        IPV6：有128位二进制数组成，用冒号十六进制表示</p>
+<p>11.IP地址分类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	             默认子网掩码                  地址范围       </span><br><span class="line">A类：1---126      255.0.0.0              1.0.0.0——126.255.255.255</span><br><span class="line">B类：128---191    255.255.0.0            128.0.0.0——191.255.255.255</span><br><span class="line">C类：192---223    255.255.255.0          192.0.0.0——223.255.255.255</span><br><span class="line">D类：224---239    用于组播</span><br><span class="line">E类：240---255    用于科研</span><br></pre></td></tr></table></figure>
+
+<p>12.网络常见名词：</p>
+<p>​        IP用来标识一台主机；</p>
+<p>​        子网掩码用来标识IP地址中的网络位和主机位；</p>
+<p>​        网络位：在IP地址中与子网掩码1（二进制）对应的是网络位；</p>
+<p>​        主机位：在IP地址中与子网掩码0（二进制）对应的是主机位；</p>
+<p>​        网络地址：主机位全为0——–路由器找路时使用</p>
+<p>​        广播地址：主机位全为1——–同一个网络中广播的时候使用</p>
+<p>13.路由协议：包括静态路由协议和动态路由协议</p>
+<p>14.常用的端口号：</p>
+<p>端口号范围：0——65535,1——1024是知名端口</p>
+<p>TCP  21/20——FTP（21建立连接，20用来传输数据）</p>
+<p>TCP 80——Web服务（http协议）；https(TCP443)</p>
+<p>TCP445——Windows的共享</p>
+<p>TCP23——Telnet，明文传输</p>
+<p>TCP22——SSH，加密传输</p>
+<p>TCP3389——远程恒桌面RDP服务</p>
+<p>TCP25——SMTP（邮件传输协议），发送</p>
+<p>TCP110——POP3（邮局协议版本3），接受邮件</p>
+<p>TCP3306——MYSQL服务<br>UDP53——DNS服务（如果是客户端请求服务器来解析的haul，使用的是UDP-53）</p>
+<p>UDP67,68——DHCP服务</p>
+<p>UDP69——TFTP服务（简单文件传输协议）</p>
+<p>UDP111——RPC（远程过程调用）</p>
+<p>UDP123——NTP（网络时间协议）</p>
+<p>15.MAC地址：</p>
+<p>​    由48bit的二进制数组成，为了读写方便，用十六进制表示。其中前24位是厂商信息，后    24位表示设备信息，由厂家自定义。MAC地址是由厂家出厂 的时候直接烧录到网卡里 ，    一般不能修改。<br>​    ARP -a    //查看ARP表——IP地址—MAC地址<br>​                    单播MAC地址：如果一个MAC地址的第八位是0，这个地址表示单播MAC   </p>
+<p>​                    组播MAC地址：如果一个MAC地址的第八位是1，这个地址表示组播MAC  </p>
+<p>​                     广播MAC地址：全FF:FF:FF:FF</p>
+<p>16.网络层数据包格式：</p>
+<p>​        数据包：三层ip头部+数据      IP头部： 标准长度为20字节</p>
+<p>​        TTL:tme to live 生存时间，是一个三层防环机制，可以限制一个数据包在网络中的传输时间。数据包没经过一个三层设备（路由），它的TTL值就会减1，如果TTL值=0，那么这个数据包就不能继续传播，会被丢弃，每经过一次三层设备，叫做一跳。</p>
+<p>17.广播域广播域：</p>
+<p>​    广播：将广播地址作为目的地址的数据帧；</p>
+<p>​    广播域：网络中能接收到同一个广播所有节点的集合；</p>
+<p>18.路由器的功能：</p>
+<p>（1）实现不同网段的通信（2）隔离广播域（3）为数据包寻找一条最优路径</p>
+<p>​        注意：路由器的每个接口都是不同的一个网段（一个广播域）</p>
+<p>19.解决链路冗余问题的方法：</p>
+<p>​        负载均衡：多条链路同时进行数据传输，没有主备链路之分；如果一跳down掉，还有                            一条冗余</p>
+<p>​        浮动路由：多条链路中至于一条是主链路，其他都是备份链路，只有主链路发生故障，                            备份链路才会被启用。通过修改静态路由的优先级（管理距离）来决定那条                            链路是主链路。</p>
+<p>20.静态路由：</p>
+<p>​        边缘路由器（出口路由）：一端连着内网（LAN），一端连着外网（WAN）</p>
+<p>​        默认路由器：一般配置在出口路由器，一边连接内网一边连接外网，所有不知道的数                                                       据包都交给互联网</p>
+<p>21.TCP协议：</p>
+<p>​    TCP：是可靠的传输方式；所有的web页面都是基于TCP的。<br>      （1）TCP传输数据之前，先建立连接的；<br>      （2）TCP传输数据的时候，会给每个数据做一个编号（sequence 序列号），以保障数                据的可靠性。<br>      （3）TCP是全双工的协议，同一时间可以上传和下载。</p>
+<p>22.TCP的报文结构：<br>  （1）第一列：源目端口号<br>  （2）第二列：序列号（发送端给每个数据进行编号）<br>  （3）第三列：确认号（用来对发送端的数据做确认）=====》保障数据传输的可靠性<br>  （4）第四列：包含Flag位（标志位），用来描述这个报文的功能。<br>       SYN=1，表示想建立连接。<br>       ACK=1，表示报文是用来回复的。<br>       FIN=1，表示想拆除连接。</p>
+<p>23.基于TCP三次握手的攻击<br>  （1）SYN攻击：攻击者向服务器发送大量的“伪造请求报文”，服务器会向“假的请求者”去建立邻居关系；但实际上，这些“主机”根本没有请求服务器建立连接，导致服务器一直处于半连接状态。如果连接的数量过多，会导致服务器资源消耗严重，甚至死机。<br>  （2）LAND攻击：攻击者伪造报文，让服务器自己和自己建立连接，导致服务器资源消耗严重。</p>
+<p>24.VLAN（virtual lan  虚拟局域网）</p>
+<p>​        一个VLAN=一个网段=一个广播域；</p>
+<p>25.vlan划分的意义：</p>
+<p>（1）过大的广播域，造成了带宽的浪费；</p>
+<p>（2）过大的MAC地址表，造成转发效率低下；</p>
+<p>（3）存在安全隐患，不好管理</p>
+<p>26：vlan的划分：</p>
+<p>​        静态vlan：基于端口划分，链接到交换机某个接口的主机始终属于一个vlan；</p>
+<p>​        动态vlan：基于MAC地址划分；不管主机移动到哪个端口，都属于一个vlan；</p>
+<p>​                    注：动态vlan需要部署VMPS服务器，很麻烦，一般不用。</p>
+<p>27.vlan的范围：</p>
+<p>​        VLAN1是默认所有交换机的接口，不能删除；</p>
+<p>​        2-1001位用户使用的以太网VLAN（常用）；</p>
+<p>​        0,4095是保留VLAN，仅限系统使用；</p>
+<p>​        扩展VLAN 1025-4094 ，用于扩展以太网的VLAN；</p>
+<p>28.Access链路与Trunk链路：</p>
+<p>Access链路：连接交换机与pc之间的链路，只能承载一个vlan；</p>
+<p>Trunk链路：连接交换机与交换机，交换机与路由器之间的链路，可以承载多个vlan；</p>
+<p>29.以太网中实现中继，有两种封装类型：</p>
+<p>​        ISL(Cisco私有标准)</p>
+<p>​        IEEE 802.1q(国际通用标准)</p>
+<p>30.Native Vlan（本征vlan）；在 交换机中默认是vlan1。</p>
+<p>​    除了vlan1，其他自己创建的vlan都要打标签</p>
+<p>（1）交换机收到一个来自native vlan的数据，会不打标签发送（原始数据帧）</p>
+<p>（2）如果交换机收到一个原始数据帧，会把数据帧广播到native vlan的端口</p>
+<p>31.DTP协议：动态trunk协议，用来协商这条链路是否要成为trunk（思科私有协议）</p>
+<p>​        trunk的模式：接入（Access）不发送DTP，也不协商；不成为trunk；</p>
+<p>​                                干道（Trunk）强制为trunk，不管对端状态，收到DTP报文；</p>
+<p>​                                动态企望（Dynamic desirable）主动发送和响应DTP报文协商；</p>
+<p>​                                动态自动（Dynamic auto）不发送DTP，如果收到可以恢复，被动协商</p>
+<p>​                                非协商（Nonegotiate）不再发送DTP报文</p>
+<p>​        如果是多个厂商对接，一般是trunk和nonegotiate参数搭配使用，不协商，强制为trunk</p>
+<p>32.以太通道（EthernetChannel）：多条链路负载均衡，带宽提高；容错，当一条链路失效时，其他线路通信，不会丢包</p>
+<p>​        解决交换机之间的链路冗余问题，可提高网络的高可用性。</p>
+<p>​                                </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag"># 网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/24/思科模拟器配置/" rel="next" title="思科模拟器中网络配置">
+                <i class="fa fa-chevron-left"></i> 思科模拟器中网络配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/24/各层网络模型/" rel="prev" title="网络各层模型概述">
+                网络各层模型概述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/2.jpg" alt="陈浩东">
+            
+              <p class="site-author-name" itemprop="name">陈浩东</p>
+              <p class="site-description motion-element" itemprop="description">网络安全入狱指南</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈浩东</span>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">36.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script src="/live2d-widget/autoload.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

